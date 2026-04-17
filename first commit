@@ -1,0 +1,76 @@
+class Product {
+    String productName;
+    int quantity;
+    int threshold;
+
+    Product(String productName, int quantity, int threshold) {
+        this.productName = productName;
+        this.quantity = quantity;
+        this.threshold = threshold;
+    }
+
+    void checkStock() {
+        if (quantity < threshold) {
+            System.out.println("Product: " + productName + " - Low Stock Alert!");
+        } else {
+            System.out.println("Product: " + productName + " - Stock OK");
+        }
+    }
+
+    void displayProduct() {
+        System.out.println("Name: " + productName +
+                ", Quantity: " + quantity +
+                ", Threshold: " + threshold);
+    }
+}
+
+class InventoryManager {
+    Product[] products;
+
+    InventoryManager(Product[] products) {
+        this.products = products;
+    }
+
+    void checkLowStock() {
+        System.out.println("Checking Inventory...\n");
+        for (int i = 0; i < products.length; i++) {
+            products[i].checkStock();
+        }
+    }
+
+    void displayInventory() {
+        System.out.println("\nInventory Details:");
+        for (int i = 0; i < products.length; i++) {
+            products[i].displayProduct();
+        }
+    }
+}
+
+public class project {
+    public static void main(String[] args) {
+
+        Product p1 = new Product("Laptop", 10, 5);
+        Product p2 = new Product("Mouse", 2, 5);
+        Product p3 = new Product("Keyboard", 7, 3);
+
+        Product[] productList = {p1, p2, p3};
+
+        InventoryManager manager = new InventoryManager(productList);
+
+        manager.displayInventory();
+
+        manager.checkLowStock();
+    }
+}
+
+// Output -->
+
+// Inventory Details:
+// Name: Laptop, Quantity: 10, Threshold: 5
+// Name: Mouse, Quantity: 2, Threshold: 5
+// Name: Keyboard, Quantity: 7, Threshold: 3
+// Checking Inventory...
+
+// Product: Laptop - Stock OK
+// Product: Mouse - Low Stock Alert!
+// Product: Keyboard - Stock OK
